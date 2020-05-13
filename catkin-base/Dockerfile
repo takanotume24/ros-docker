@@ -1,17 +1,42 @@
-FROM ros:melodic
+FROM nvidia/cudagl:10.2-devel-ubuntu18.04
+SHELL ["/bin/bash", "-c"]
 ENV HOME=/root
-    
+ENV CATKIN_WS=${HOME}/catkin_ws
+ENV DEBIAN_FRONTEND=noninteractive
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility,graphics
 
-RUN apt update && apt install wget -y
+RUN apt update && apt install -y\
+    wget \
+    git \
+    tzdata \
+    lsb-release
 
-# install catkin
-RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list' && \
-    wget http://packages.ros.org/ros.key -O - | apt-key add - && \
-    apt update && apt install python-catkin-tools -y 
-WORKDIR ${HOME}
-RUN mkdir -p catkin_ws/src
-WORKDIR ${HOME}/catkin_ws
-RUN catkin init
+RUN sh -c 'echo "$(lsb_release -sc)"'
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' &&\
+    apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+RUN apt update && apt install -y\
+    ros-melodic-desktop-full \
+    python-rosdep \
+    python-catkin-tools \
+    python-wstool
+
+RUN mkdir -p ${CATKIN_WS}/src
+WORKDIR ${CATKIN_WS}
+RUN source /opt/ros/melodic/setup.bash &&\
+    catkin init &&\
+    rosdep init &&\
+    rosdep update &&\
+    catkin build 
+RUN echo "source /root/catkin_ws/devel/setup.bash" > ${HOME}/.bashrc
+RUN source ${HOME}/.bashrc
+
+
+
+
+
+
 
 
 

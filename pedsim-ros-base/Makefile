@@ -1,11 +1,11 @@
 IMAGE=ros-docker
-TAG=catkin-base
+TAG=pedsim-ros-base
 
 build:
 	sudo docker build --no-cache -t ${IMAGE}:${TAG} .
 run:
 	sudo docker run -it \
-		--gpus all \
+		--gpus all,capabilities=graphics \
 		--env="DISPLAY" \
 		--env="QT_X11_NO_MITSHM=1" \
 		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
