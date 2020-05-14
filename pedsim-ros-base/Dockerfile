@@ -1,4 +1,4 @@
-FROM ros-docker:catkin-base
+FROM takanotume24/ros-docker-with-nvidia:catkin-base
 ENV HOME=/root
 ENV CATKIN_WS=${HOME}/catkin_ws
 ENV ROS_DISTRO=melodic
@@ -18,3 +18,4 @@ RUN rosdep install -i -y --from-path .
 RUN catkin build
 RUN source ${HOME}/.bashrc
 
+# export NO_AT_BRIDGE=1
