@@ -2,7 +2,7 @@ IMAGE=ros-docker
 TAG=catkin-base
 
 build:
-	sudo docker build --no-cache -t ${IMAGE}:${TAG} .
+	sudo docker build -t ${IMAGE}:${TAG} .
 run:
 	sudo docker run -it \
 		--gpus all \
