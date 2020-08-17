@@ -1,4 +1,4 @@
-FROM ros-docker:catkin-base-with-nvidia
+FROM takanotume24/ros-docker:catkin-base-with-nvidia
 ENV HOME=/root
 ENV CATKIN_WS=${HOME}/catkin_ws
 ENV ROS_DISTRO=melodic
@@ -8,7 +8,7 @@ SHELL ["/bin/bash", "-c"]
 
 RUN apt update && apt install -y\
     rsync
-    
+
 WORKDIR ${HOME}
 RUN git clone https://github.com/Microsoft/AirSim.git;
 WORKDIR ${HOME}/AirSim

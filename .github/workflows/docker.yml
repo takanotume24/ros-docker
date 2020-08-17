@@ -3,8 +3,13 @@ name: Crystal CI
 on: [push]
 
 jobs:
-  build:
+  build-base-images:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tags:
+          - "catkin-base"
+          - "catkin-base-with-nvidia"
 
     steps:
     - name: Checkout code
@@ -18,3 +23,29 @@ jobs:
         repository: takanotume24/ros-docker
         tag_with_ref: true
         tag_with_sha: true
+        docker_file: ${{ matrix.tags }}/Dockerfile
+        tags: ${{ matrix.tags }}
+           
+build-extra-images:
+  runs-on: ubuntu-latest
+    needs: build-base-images
+    strategy:
+      matrix:
+        tags:
+          - "airsim"
+          - "pedsim-ros-base"
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+  
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: takanotume24/ros-docker
+        tag_with_ref: true
+        tag_with_sha: true
+        docker_file: ${{ matrix.tags }}/Dockerfile
+        tags: ${{ matrix.tags }}
