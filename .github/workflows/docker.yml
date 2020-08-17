@@ -23,7 +23,7 @@ jobs:
         repository: takanotume24/ros-docker
         tag_with_ref: true
         tag_with_sha: true
-        docker_file: "${{ matrix.tags }}/Dockerfile"
+        dockerfile: "${{ matrix.tags }}/Dockerfile"
         tags: ${{ matrix.tags }}
            
   build-extra-images:
@@ -47,5 +47,5 @@ jobs:
         repository: takanotume24/ros-docker
         tag_with_ref: true
         tag_with_sha: true
-        docker_file: "${{ matrix.tags }}/Dockerfile"
+        dockerfile: "${{ matrix.tags }}/Dockerfile"
         tags: ${{ matrix.tags }}
