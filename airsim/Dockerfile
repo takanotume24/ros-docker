@@ -1,4 +1,4 @@
-FROM takanotume24/ros-docker-with-nvidia:catkin-base
+FROM ros-docker:catkin-base-with-nvidia
 ENV HOME=/root
 ENV CATKIN_WS=${HOME}/catkin_ws
 ENV ROS_DISTRO=melodic

@@ -1,8 +1,10 @@
-FROM ubuntu:18.04
+FROM nvidia/cudagl:10.2-devel-ubuntu18.04
 SHELL ["/bin/bash", "-c"]
 ENV HOME=/root
 ENV CATKIN_WS=${HOME}/catkin_ws
 ENV DEBIAN_FRONTEND=noninteractive
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility,graphics
 ENV USER=ROOT
 
 RUN apt update && apt install -y\
