@@ -11,6 +11,8 @@ RUN apt update && apt install -y\
     tzdata \
     lsb-release \
     curl \
+    vim \
+    avahi-daemon\ 
     gnupg
 
 RUN sh -c 'echo "$(lsb_release -sc)"'
