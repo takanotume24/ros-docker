@@ -27,7 +27,7 @@ jobs:
         tags: ${{ env.latest-tag}}, ${{ env.sha-tag }}
       env:
         latest-tag: "${{ matrix.tags }}-latest"
-        sha-tag: "${{ matrix.tags }}-$GITHUB_SHA"
+        sha-tag: "${{ matrix.tags }}-${{ env.GITHUB_SHA }}"
            
   build-extra-images:
     runs-on: ubuntu-latest
@@ -54,4 +54,4 @@ jobs:
         tags: ${{ env.latest-tag}}, ${{ env.sha-tag }}
       env:
         latest-tag: "${{ matrix.tags }}-latest"
-        sha-tag: "${{ matrix.tags }}-$GITHUB_SHA"
+        sha-tag: "${{ matrix.tags }}-${{env.GITHUB_SHA}}"
