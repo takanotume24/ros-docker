@@ -1,0 +1,25 @@
+
+version: "3"
+
+services:
+  bringup:
+    image: takanotume24/turtlebot3_bringup-remote-pc:latest
+    command: >
+      bash -c "
+      source /root/.bashrc
+      && cat /root/.bashrc
+      && export ROS_MASTER_URI=http://172.16.145.82:11311
+      && roslaunch turtlebot3_bringup turtlebot3_robot.launch
+      "
+
+  rviz:
+    image: takanotume24/turtlebot3_bringup-remote-pc:latest
+    depends_on:
+      - bringup
+    command: >
+      bash -c "
+      source /root/.bashrc
+      && export TURTLEBOT3_MODEL=waffle_pi
+      && export ROS_MASTER_URI=http://172.16.145.82:11311
+      && rosrun rviz rviz -d `rospack find turtlebot3_description`/rviz/model.rviz
+      "
