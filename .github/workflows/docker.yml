@@ -37,6 +37,7 @@ jobs:
         tags:
           - "airsim"
           - "pedsim-ros-base"
+          - "turtlebot3_bringup-remote-pc"
 
     steps:
     - name: Checkout code

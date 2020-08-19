@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV USER=ROOT
 
 RUN apt update && apt install -y\
+    ubuntu-server \
     wget \
     git \
     tzdata \

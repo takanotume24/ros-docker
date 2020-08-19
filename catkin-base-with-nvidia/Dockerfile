@@ -8,6 +8,7 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,utility,graphics
 ENV USER=ROOT
 
 RUN apt update && apt install -y\
+    ubuntu-server \ 
     wget \
     git \
     tzdata \
