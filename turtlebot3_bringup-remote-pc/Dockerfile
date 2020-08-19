@@ -16,3 +16,4 @@ RUN source ${CATKIN_WS}/devel/setup.bash
 RUN rosdep install -i -y --from-path . 
 RUN catkin build
 RUN source ${HOME}/.bashrc
+RUN echo "export ROS_HOSTNAME=`hostname -I`" >> ${HOME}/.bashrc
