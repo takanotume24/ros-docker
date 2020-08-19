@@ -13,7 +13,9 @@ RUN apt update && apt install -y\
     lsb-release \
     curl \
     vim \
-    avahi-daemon\ 
+    avahi-daemon \ 
+    iputils-ping \
+    net-tools\ 
     gnupg
 
 RUN sh -c 'echo "$(lsb_release -sc)"'
@@ -33,8 +35,8 @@ RUN source /opt/ros/melodic/setup.bash &&\
     rosdep init &&\
     rosdep update &&\
     catkin build 
-RUN echo "source /root/catkin_ws/devel/setup.bash" > ${HOME}/.bashrc
-RUN echo "source /opt/ros/melodic/setup.bash" > ${HOME}/.bashrc
+RUN echo "source /root/catkin_ws/devel/setup.bash" >> ${HOME}/.bashrc
+RUN echo "source /opt/ros/melodic/setup.bash" >> ${HOME}/.bashrc
 RUN source ${HOME}/.bashrc
 
 # Set the locale
