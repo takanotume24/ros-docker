@@ -1,5 +1,5 @@
-IMAGE=takanotume24/catkin-base-with-nvidia
-TAG=turtlebot3_bringup-remote-pc
+IMAGE=takanotume24/turtlebot3_bringup-remote-pc
+TAG=sha-110b37b
 
 build:
 	sudo docker build --no-cache -t ${IMAGE}:${TAG} .

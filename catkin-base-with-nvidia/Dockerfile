@@ -16,6 +16,8 @@ RUN apt update && apt install -y\
     curl \
     vim \
     avahi-daemon \
+    iputils-ping \
+    net-tools\
     gnupg
 
 RUN sh -c 'echo "$(lsb_release -sc)"'
