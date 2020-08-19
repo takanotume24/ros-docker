@@ -22,8 +22,12 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: takanotume24/ros-docker
         dockerfile: "${{ matrix.tags }}/Dockerfile"
-        tags: "${{ matrix.tags }}-$GITHUB_SHA", "${{ matrix.tags }}-latest"
         always_pull: true
+        add_git_labels: true
+        tags: ${{ env.latest-tag}}, ${{ env.sha-tag }}
+      env:
+        - latest-tag: "${{ matrix.tags }}-latest"
+        - sha-tag: "${{ matrix.tags }}-$GITHUB_SHA"
            
   build-extra-images:
     runs-on: ubuntu-latest
@@ -45,5 +49,9 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: takanotume24/ros-docker
         dockerfile: "${{ matrix.tags }}/Dockerfile"
-        tags: "${{ matrix.tags }}-$GITHUB_SHA", "${{ matrix.tags }}-latest"
         always_pull: true
+        add_git_labels: true
+        tags: ${{ env.latest-tag}}, ${{ env.sha-tag }}
+      env:
+        - latest-tag: "${{ matrix.tags }}-latest"
+        - sha-tag: "${{ matrix.tags }}-$GITHUB_SHA"
